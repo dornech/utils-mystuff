@@ -34,11 +34,8 @@ Example / doctest:
 
 import os
 from ctypes import *
-# import pywintypes
 import win32gui
 
-# import datetime
-# import dateutil
 import time
 
 

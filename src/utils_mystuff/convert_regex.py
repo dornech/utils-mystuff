@@ -153,7 +153,6 @@ def convertRegExVB2Python(reVB: str) -> str:
             # only simple integer formatting accepted
             params = term[len("format") + 1:len(term) - 1].split(",")
             params[0] = convert_other(params[0], False)
-            # return f""""{{:0{params[1]}d}}".format({params[0]})"""
             return f"\"{{:0{params[1].count('0')}d}}\".format({params[0]})"
         else:
             return convert_other(term)
@@ -209,7 +208,6 @@ def clean_for_eval(expression: str) -> str:
         pos = expression.find(f"{char}0")
         while pos >= 0:
             if expression[pos + 2:pos + 3] in "0123456789":
-                # expression_old = expression
                 expression = expression[0:pos + 1] + expression[pos + 2:]
                 find_start = pos
             else:

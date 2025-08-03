@@ -120,8 +120,6 @@ class GUIwrapperClass:
                 self._gui_module.TEXT_ENTRY_FONT_SIZE = 10
             elif gui.lower() == "freesimplegui" or gui.lower() == "pysimplegui":
                 self._guiID = gui
-                # self._gui_module = importlib.import_module("PySimpleGUI")
-                # self._gui_module = importlib.import_module("PySimpleGUI-4-foss")
                 self._gui_module = importlib.import_module("FreeSimpleGUI")
                 # set theme
                 self._gui_module.theme("Default1")
@@ -162,7 +160,6 @@ class GUIwrapperClass:
             self._gui_module.alert(text, title)
         elif self._guiID.lower() in {"freesimplegui", "pysimplegui"}:
             # https://github.com/PySimpleGUI/PySimpleGUI/issues/5879
-            # self._gui_module.popup(text, title=title)
             self._gui_module.popup(text, title=title, drop_whitespace=False, button_justification="LEFT")
             pass
 
@@ -310,7 +307,6 @@ class GUIwrapperClass:
 
 # initialize GUIwrapper with default GUI framework
 GUIwrapper = GUIwrapperClass()
-# GUIwrapper.setGUI("pysimplegui")
 GUIwrapper.setGUI("freesimplegui")
 
 

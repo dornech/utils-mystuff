@@ -121,15 +121,11 @@ def find_last_changed_file(
             scanentry: os.DirEntry    # overcome PyCharm IDE error - workaround derived from https://youtrack.jetbrains.com/issue/PY-46041
             for scanentry in searchpathscan:
                 if fnmatch.fnmatch(scanentry.name, searchpattern):
-                    # filemodified = datetime.datetime.fromtimestamp(scanentry.stat().st_mtime, tz=datetime.timezone.utc)
                     filemodified = scanentry.stat().st_mtime_ns / 1000000000
-                    # if filemodified >= searchstart:
                     if filemodified >= searchstart.timestamp():
                         pathfilename = os.path.join(searchpath, scanentry.name)
-                        # while os.path.isfile(pathfilename) and not os.access(pathfilename, os.W_OK):
                         while os.path.isfile(pathfilename) and is_file_locked(pathfilename):
                             time.sleep(0.5)
-                        # if os.path.isfile(pathfilename) and os.access(pathfilename, os.W_OK):
                         if os.path.isfile(pathfilename) and not is_file_locked(pathfilename):
                             if filemodified > lastchangedtimestamp and scanentry.stat().st_size > 0:
                                 lastchangedfile = scanentry.name
