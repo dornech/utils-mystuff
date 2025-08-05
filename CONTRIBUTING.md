@@ -1,6 +1,6 @@
 # Contributing
 
-Welcome to the contributor guide of Personal utils package for Python.
+Welcome to the contributor guide of Personal utilities package for Python.
 
 This document focuses on getting any potential contributor familiarized with
 the development processes, but [other kinds of contributions] are also appreciated.
