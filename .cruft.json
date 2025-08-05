@@ -1,0 +1,25 @@
+{
+  "template": "https://github.com/dornech/the-hatchlor-enhanced",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "full_name": "dornech",
+      "email": "dornech@gmx.de",
+      "project_name": "Personal utilities package for Python",
+      "project_slug": "utils-mystuff",
+      "pkg_name": "utils_mystuff",
+      "project_short_description": "Package with various utilities i.e. VB regex translation, CLI logging, file handling, basic GUI Wrapper ...",
+      "open_source_license": "GPL-3.0-only",
+      "target_python_version": "3.9",
+      "github_username": "dornech",
+      "project_repo": "https://github.com/dornech/utils-mystuff",
+      "pypi_username": "dornech",
+      "lock_file_support": false,
+      "_template": "https://github.com/dornech/the-hatchlor-enhanced.git"
+    }
+  },
+  "directory": null,
+  "skip": [
+    ".git"
+  ]
+}
