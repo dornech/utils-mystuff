@@ -181,9 +181,33 @@ def convertRegExVB2Python(reVB: str) -> str:
     return rePy
 
 def convert_regexVB2python(reVB: str) -> str:
+    """
+    convert_regexVB2python - convert Microsoft VB / COM regular expression to Python regular expression
+
+    Alternative caller for convertRegExVB2Python. See details there.
+
+    Arguments:
+        reVB (str): regular expression according to VB / COM standard for Microsoft RegEx engine
+
+    Returns:
+        str: converted regular expression for Python RegEx engine
+    """
+
     return convertRegExVB2Python(reVB)
 
 def convert_regexVB_2_python(reVB: str) -> str:
+    """
+    convert_regexVB_2_python - convert Microsoft VB / COM regular expression to Python regular expression
+
+    Alternative caller for convertRegExVB2Python. See details there.
+
+    Arguments:
+        reVB (str): regular expression according to VB / COM standard for Microsoft RegEx engine
+
+    Returns:
+        str: converted regular expression for Python RegEx engine
+    """
+
     return convertRegExVB2Python(reVB)
 
 
