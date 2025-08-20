@@ -77,8 +77,8 @@ local_scheme = "dirty-tag"
 [tool.hatch.build]
 packages = ["src/utils_mystuff"]
 
-[tool.hatch.build.hooks.vcs]
-version-file = "src/utils_mystuff/_version.py"
+# [tool.hatch.build.hooks.vcs]
+# version-file = "src/utils_mystuff/_version.py"
 
 [tool.hatch.build.targets.sdist]
 artifacts = ["_version.py"]
