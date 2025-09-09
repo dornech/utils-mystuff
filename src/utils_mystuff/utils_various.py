@@ -46,20 +46,20 @@ LOCALE_LOCK = threading.Lock()
 
 # switch locale threadsafe
 @contextmanager
-def setlocale(localevalue: str):
+def setlocale(locale_value: str):
     """
     setlocale - switch locale threadsafe
 
     Args:
-        localevalue (str): _description_
+        locale_value (str): target locale
     """
 
     with LOCALE_LOCK:
-        savedlocalevalue = locale.setlocale(locale.LC_ALL)
+        saved_locale_value = locale.setlocale(locale.LC_ALL)
         try:
-            yield locale.setlocale(locale.LC_ALL, localevalue)
+            yield locale.setlocale(locale.LC_ALL, locale_value)
         finally:
-            locale.setlocale(locale.LC_ALL, savedlocalevalue)
+            locale.setlocale(locale.LC_ALL, saved_locale_value)
 
 
 
@@ -136,6 +136,20 @@ def read_configfile(
     optionxform: Optional[Callable] = None,
     encoding: str = "utf-8"
 ) -> configparser.ConfigParser:
+    """
+    read_configfile - read config file with standardized boolean states into ConfigParser object
+
+    Args:
+        configfile (str): config file
+        optionxform (callable, optional): callable to pass on to ConfigParser.optionxform. Defaults to None.
+        encoding (str, optional): file encoding. Defaults to "utf-8".
+
+    Raises:
+        Exception: file 'configfile' does not exist.
+
+    Returns:
+        configparser.ConfigParser: config parser object
+    """
     return readconfigfile(configfile, optionxform, encoding)
 
 
@@ -190,7 +204,7 @@ def init_logger(
     filename: str = ""
 ) -> logging.Logger:
     """
-    init_lexitogger - initialize standard logger object
+    init_logger - initialize standard logger object
 
     Args:
         loggername (str): name of logger
@@ -205,7 +219,7 @@ def init_logger(
 
 
 # set loglevel from config file
-def setLogLevel(logger: logging.Logger, config: configparser.ConfigParser, section: str, optionLogLevel: str):
+def setLogLevel(logger: logging.Logger, config: configparser.ConfigParser, section: str, optionLogLevel: str) -> None:
     """
     setLogLevel - set log level from configparser object
 
@@ -223,10 +237,28 @@ def setLogLevel(logger: logging.Logger, config: configparser.ConfigParser, secti
         else:
             logger.setLevel(logging.INFO)
 
-def set_loglevel(logger: logging.Logger, config: configparser.ConfigParser, section: str, optionLogLevel: str):
+def set_loglevel(logger: logging.Logger, config: configparser.ConfigParser, section: str, optionLogLevel: str) -> None:
+    """
+    set_logLevel - set log level from cCallableonfigparser object
+
+    Args:
+        logger (logging.Logger): name of logger
+        config (configparser): configparser object
+        section (str): section in 'config'
+        optionLogLevel (str): option in 'config'
+    """
     setLogLevel(logger, config, section, optionLogLevel)
 
-def set_loglevel_from_config(logger: logging.Logger, config: configparser.ConfigParser, section: str, optionLogLevel: str):
+def set_loglevel_from_config(logger: logging.Logger, config: configparser.ConfigParser, section: str, optionLogLevel: str) -> None:
+    """
+    set_loglevel_from_config - set log level from configparser object
+
+    Args:
+        logger (logging.Logger): name of logger
+        config (configparser): configparser object
+        section (str): section in 'config'
+        optionLogLevel (str): option in 'config'
+    """
     setLogLevel(logger, config, section, optionLogLevel)
 
 
@@ -326,7 +358,7 @@ def is_date(checkvalue: Any, checkformat="%d.%m.%Y") -> bool:
 # copy fields from dict to target structure, can be used to copy same named fields to a data class from
 # - TypedArgParser via <TypedArgParser object>.as_dict()
 # - one dataclass to another via <dataclass>.asdict()
-def copydictfields(source: dict, target: Any):
+def copydictfields(source: dict, target: Any) -> None:
     """
     copydictfields - copy fields from dict to target structure
 
@@ -345,7 +377,7 @@ def copydictfields(source: dict, target: Any):
             if key in target:
                 target[key] = value
 
-def copy_dictfields(source: dict, target: Any):
+def copy_dictfields(source: dict, target: Any) -> None:
     """
     copy_dict_fields - copy fields from dict to target structure
 
@@ -364,6 +396,7 @@ def copy_dictfields(source: dict, target: Any):
 # https://stackoverflow.com/questions/5929107/decorators-with-parameters
 # https://lemonfold.io/posts/2022/dbc/typed_decorator/
 
+
 # parameterized decorator
 # - definition of ignored exceptions in decorator parameter using closure
 # - no change of signature of decorated function
@@ -373,8 +406,11 @@ def ignore_exceptions_parameterized(ignored_exceptions: tuple[BaseException]):
 
     Args:
         ignored_exceptions (tuple[BaseException]): exceptions to be ignored
+
+    Returns:
+      Callable: wrapped function
     """
-    def ignore_exceptions_helper(func) -> Callable:
+    def ignore_exceptions_helper(func):
 
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -401,6 +437,9 @@ def ignore_exceptions(func):
 
     Args:
         func (Callable): function to be decorated
+
+    Returns:
+      Callable: wrapped function
     """
 
     @wraps(func)

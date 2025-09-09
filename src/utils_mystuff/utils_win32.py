@@ -32,6 +32,8 @@ Example / doctest:
 
 
 
+from typing import Any
+
 import os
 from ctypes import *
 import win32gui
@@ -44,12 +46,15 @@ import time
 
 # variant using ctypes
 # http://makble.com/how-to-find-window-with-wildcard-in-python-and-win32gui
-def find_window_ctypes(title: str):
+def find_window_ctypes(title: str) -> Any:
     """
     find_window_ctypes - find windows from title, variant using ctypes
 
     Args:
         title (str): window title
+
+    Returns:
+        Union[str, bool]: title if found, False otherwise
     """
 
     titles = []
@@ -64,8 +69,8 @@ def find_window_ctypes(title: str):
             titles.append((hwnd, buff.value.encode(), classname.value, windll.user32.IsIconic(hwnd)))
         return True
 
-    def refresh_wins():
-        titles = []
+    def refresh_wins() -> Any:
+        titles: list[str] = []
         windll.user32.EnumWindows(WINFUNCTYPE(c_bool, c_int, POINTER(c_int))(foreach_window_gettitle), 0)
 
     refresh_wins()
@@ -76,12 +81,15 @@ def find_window_ctypes(title: str):
     return False
 
 # variant using win32gui
-def find_window_win32gui(title: str):
+def find_window_win32gui(title: str) -> Any:
     """
     find_window_ctypes - find windows from title, variant using win32gui
 
     Args:
         title (str): window title
+
+    Returns:
+        Union[str, bool]: title if found, False otherwise
     """
 
     titles = []
@@ -110,7 +118,7 @@ def find_window_win32gui(title: str):
 WM_CLOSE = 0x0010
 
 # variant using ctypes
-def close_app_windowtitle_ctypes(title: str):
+def close_app_windowtitle_ctypes(title: str) -> None:
     """
     close_app_windowtitle_ctypes - close window / application depending on title, variant using ctypes
 
@@ -124,7 +132,7 @@ def close_app_windowtitle_ctypes(title: str):
         time.sleep(0.1)
 
 # variant using win32gui
-def close_app_windowtitle_win32gui(title: str):
+def close_app_windowtitle_win32gui(title: str) -> None:
     """
     close_app_windowtitle_win32gui - close window / application depending on title, variant using win32gui
 
@@ -142,7 +150,7 @@ def close_app_windowtitle_win32gui(title: str):
 # note:
 # - execution is pretty slow
 # - watch out % vs %% in direct entry vs cmd-files
-def close_app_windowtitle_taskkill(title: str):
+def close_app_windowtitle_taskkill(title: str) -> None:
     """
     close_app_windowtitle_taskkill - close window / application depending on title, variant using taskkill
 
@@ -155,14 +163,20 @@ def close_app_windowtitle_taskkill(title: str):
     time.sleep(0.1)
 
 # callpoint
-def close_app_windowtitle(title: str):
+def close_app_windowtitle(title: str) -> None:
+    """
+    close_app_windowtitle - close window / application depending on title
+
+    Args:
+        title (str): window title
+    """
     close_app_windowtitle_win32gui(title)
 
 
 # wait for open window (overcome delay in asynchronuous processing subprocess.Popen)
 
 # variant using ctypes
-def wait_for_window_ctypes(title: str, timeout: int = 5, wait: float = 0.25):
+def wait_for_window_ctypes(title: str, timeout: int = 5, wait: float = 0.25) -> None:
     """
     wait_for_window_ctypes - wait for close window (overcome delay in asynchronous processing subprocess.Popen)
 
@@ -181,7 +195,7 @@ def wait_for_window_ctypes(title: str, timeout: int = 5, wait: float = 0.25):
     return
 
 # variant using win32gui
-def wait_for_window_win32gui(title: str, timeout: int = 5, wait: float = 0.25):
+def wait_for_window_win32gui(title: str, timeout: int = 5, wait: float = 0.25) -> None:
     """
     wait_for_window_win32gui - wait for close window (overcome delay in asynchronous processing subprocess.Popen)
 
@@ -201,5 +215,13 @@ def wait_for_window_win32gui(title: str, timeout: int = 5, wait: float = 0.25):
     return
 
 # callpoint
-def wait_for_window(title: str, timeout: int = 5, wait: float = 0.25):
+def wait_for_window(title: str, timeout: int = 5, wait: float = 0.25) -> None:
+    """
+    wait_for_window - wait for close window (overcome delay in asynchronous processing subprocess.Popen)
+
+    Args:
+        title (str): _description_
+        timeout (int, optional): timeout time. Defaults to 5.
+        wait (float, optional): wait time. Defaults to 0.25.
+    """
     wait_for_window_win32gui(title, timeout, wait)

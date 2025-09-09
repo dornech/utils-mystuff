@@ -38,11 +38,12 @@ import inspect
 
 # log handler switcher
 # inspired by https://stackoverflow.com/questions/20111758/how-to-insert-newline-in-python-logging
-def logger_newline_switch_handler(self, how_many_lines: int = 1):
+def _logger_newline_switch_handler(self, how_many_lines: int = 1) -> None:
     """
     log_newline_switch_handler - method for standard logger object to insert empty line
 
     Args:
+        self (cls): logger, needed as sub is assigned as logger object method.
         how_many_lines (int, optional): number of empty lines. Defaults to 1.
     """
 
@@ -56,11 +57,12 @@ def logger_newline_switch_handler(self, how_many_lines: int = 1):
     self.removeHandler(self.handler_newline)
     self.addHandler(self.handler_standard)
 
-def logger_newline_switch_formatter(self, how_many_lines: int = 1):
+def _logger_newline_switch_formatter(self, how_many_lines: int = 1) -> None:
     """
     log_newline_switch_formatter - method for standard logger object to insert empty line
 
     Args:
+        self (cls): logger, needed as sub is assigned as logger object method.
         how_many_lines (int, optional): number of empty lines. Defaults to 1.
     """
 
@@ -79,6 +81,7 @@ def setup_CLI_logger(loggerNameCLIlog: str, *, switch_via_handler: bool = False)
 
     Args:
         loggerNameCLIlog (str): name of logger.
+        switch_via_handler (bool): define switching mode. Defaults to False.
 
     Returns:
         Logger: logger object
@@ -115,7 +118,7 @@ def setup_CLI_logger(loggerNameCLIlog: str, *, switch_via_handler: bool = False)
         # set own switching attributes
         loggerCLI.handler_standard = handlerCLI
         loggerCLI.handler_newline = handlerNewline
-        loggerCLI.newline = types.MethodType(logger_newline_switch_handler, loggerCLI)
+        loggerCLI.newline = types.MethodType(_logger_newline_switch_handler, loggerCLI)
 
     else:
 
@@ -131,7 +134,7 @@ def setup_CLI_logger(loggerNameCLIlog: str, *, switch_via_handler: bool = False)
         loggerCLI.handler = handler
         loggerCLI.formatter_standard = formatter_standard
         loggerCLI.formatter_blank = formatter_blank
-        loggerCLI.newline = types.MethodType(logger_newline_switch_formatter, loggerCLI)
+        loggerCLI.newline = types.MethodType(_logger_newline_switch_formatter, loggerCLI)
 
     return loggerCLI
 
@@ -142,7 +145,7 @@ loggerCLI = setup_CLI_logger(loggerNameCLIlog)
 
 
 # logger routine for args
-def logCLIargs():
+def logCLIargs() -> None:
     """
     logCLIargs - write command line interface parameters to specific CLI call log
     """
@@ -164,7 +167,7 @@ def logCLIargs():
     # loggerCLI.info("\n")
     loggerCLI.newline()
 
-def log_cli_args():
+def log_cli_args() -> None:
     """
     log_cli_args - write command line interface parameters to specific CLI call log
     """
@@ -172,7 +175,7 @@ def log_cli_args():
 
 
 # logger routine for parsed params (should be type dict)
-def logCLIparams(params):
+def logCLIparams(params) -> None:
     """
     logCLIparams - write parsed parameters to specific call log
 
@@ -187,7 +190,7 @@ def logCLIparams(params):
     # loggerCLI.info("\n")
     loggerCLI.newline()
 
-def log_cli_params(params):
+def log_cli_params(params) -> None:
     """
     log_cli_params - write parsed parameters to specific call log
 

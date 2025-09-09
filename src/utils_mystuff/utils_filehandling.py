@@ -187,7 +187,7 @@ def load_textfile(txt_filename: str, mode: str = "str") -> Union[list[str], str]
 
 
 # close file
-def close_app_file(filename: str, msg: str, title: str):
+def close_app_file(filename: str, msg: str, title: str) -> None:
     """
     close_app_file - close data file opened by an application
 

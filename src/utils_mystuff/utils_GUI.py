@@ -143,7 +143,7 @@ class GUIwrapperClass:
         self.setGUI(gui)
 
     # generalized message box for alerts
-    def alertbox(self, text: str, title: str = ""):
+    def alertbox(self, text: str, title: str = "") -> None:
         """
         alertbox - display alert box
 
@@ -342,7 +342,7 @@ def set_gui(gui: str) -> None:
     GUIwrapper.setGUI(gui)
 
 # generalized message box for alerts
-def alertbox(text: str, title: str = ""):
+def alertbox(text: str, title: str = "") -> None:
     """
     alertbox - caller stub for singleton GUIwrapperClass object method
 
@@ -422,9 +422,21 @@ def confirm_yes_no(text: str, title: str = "", buttons: list = ['Yes', 'No']) ->
 
 # template for ready
 def exitFinished(title: str = "") -> None:
+    """
+    exitFinished - dummy finished message box.
+
+    Args:
+        title (str): title for message box. Defaults to empty string.
+    """
     msg: str = "Fertig."
 
     GUIwrapper.alertbox(msg, title)
 
 def exit_finished(title: str = "") -> None:
+    """
+    exit_finished - dummy finished message box.
+
+    Args:
+        title (str): title for message box. Defaults to empty string.
+    """
     exitFinished(title)
