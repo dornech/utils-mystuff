@@ -16,7 +16,7 @@ behavior guidelines.
 
 ## Issue Reports
 
-If you experience bugs or general issues with Personal utils package for Python, please have a look
+If you experience bugs or general issues with Personal utilities package for Python, please have a look
 on the [issue tracker].
 If you don't see anything useful there, please feel free to fire an issue report.
 
@@ -33,7 +33,7 @@ you help us to identify the root cause of the issue.
 
 ## Documentation improvements
 
-You can help improve the documentation of Personal utils package for Python by making them more readable
+You can help improve the documentation of Personal utilities package for Python by making them more readable
 and coherent, or by adding missing information and correcting mistakes.
 
 This documentation uses [mkdocs] as its main documentation compiler.
@@ -75,8 +75,8 @@ This often provides additional considerations and avoids unnecessary work.
 3. Clone this copy to your local disk:
 
    ```console
-   git clone git@github.com:YourLogin/utils-mystuff2.git
-   cd utils-mystuff2
+   git clone git@github.com:YourLogin/utils-mystuff.git
+   cd utils-mystuff
    ```
 
 4. Make sure [hatch] is installed using [pipx]:

@@ -2,7 +2,7 @@
 
 ## Short description
 
-Package with various utils i.e. VB regex translation, CLI logging, file handling, ...
+Package with various utils i.e. VB regex translation, CLI logging, file handling, basic GUI Wrapper ...
 
 ## Package content_
 
