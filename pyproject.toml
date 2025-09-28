@@ -13,7 +13,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "utils-mystuff"
-description = "Package with various utilities i.e. VB regex translation, CLI logging, file handling, basic GUI wrapper..."
+description = "Package with various utilities i.e. VB regex translation, CLI logging, file handling, basic GUI wrapper ..."
 readme = "README.md"
 requires-python = ">=3.9"
 # only license identifier from https://spdx.org/licenses/ are allowed
@@ -22,8 +22,7 @@ license = { text = "GPL-3.0-only" }
 keywords = [
     "RegEx conversion", "regular expression",
     "command line interface", "CLI logging", "logging",
-    "GUI wrapper", "file handling",
-    "Win32", "window handling"
+    "GUI wrapper", "file handling"
 ]
 authors = [
     { name = "dornech", email = "dornech@gmx.de" },
@@ -44,7 +43,6 @@ dependencies = [
     "freesimplegui",
     "python_dateutil",
     "pytz",
-    "pywin32",
     "pymsgbox"
 ]
 dynamic = ["version"]

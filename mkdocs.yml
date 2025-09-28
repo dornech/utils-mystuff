@@ -1,6 +1,6 @@
 # Project information
 site_name: Personal utilities package for Python
-site_description: Package with various utilities i.e. VB regex translation, CLI logging, file handling, basic GUI Wrapper ...
+site_description: Package with various utilities i.e. VB regex translation, CLI logging, file handling, basic GUI wrapper ...
 site_author: dornech
 site_url: https://github.com/dornech/utils-mystuff
 copyright: 'Copyright &copy; dornech 2024-present'

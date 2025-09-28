@@ -9,7 +9,6 @@ Set of submodules contains:
 - submodule with utilities to log CLI calls of Python scripts
 - submodule with utilities for file handling
 - submodule with wrapper for basic GUI functions for various GUI frameworks
-- submodule with utilities specific for Win32 platform
 - submodule with various utilities - read config file with standard parser, set up standard logger object ...
 
 Raises:
@@ -50,27 +49,3 @@ from .utils_filehandling import *
 from .utils_GUI import *
 from .utils_various import *
 from .convert_regex import *
-
-
-
-# platform / OS dependent imports
-# inspiration: https://stackoverflow.com/questions/3496592/conditional-import-of-modules-in-python
-# general schema:
-# if sys.platform == "cli":
-#     <import>
-# else:
-#     if os.name == "nt" or sys.platform == "win32":
-#         <import>
-#     elif os.name == "posix":
-#         <import>
-#     elif os.name == "java":
-#         <import>
-#     elif os.name == "macos":
-#         pass
-#     else:
-#         raise ImportError(f"No implementation for your platform ('{os.name}') available")
-
-if os.name == "nt" or sys.platform == "win32":
-    from .utils_win32 import *
-else:
-    raise ImportError(f"No implementation of window utilities available for your platform ('{os.name}').")

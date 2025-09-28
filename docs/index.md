@@ -2,9 +2,9 @@
 
 ## Short description
 
-Package with various utils i.e. VB regex translation, CLI logging, file handling, basic GUI Wrapper ...
+Package with various utils i.e. VB regex translation, CLI logging, file handling, basic GUI wrapper ...
 
-## Package content_
+## Package content
 
 Set of submodules contains:
 
@@ -12,7 +12,6 @@ Set of submodules contains:
 - submodule with utilities to log CLI calls of Python scripts
 - submodule with utilities for file handling
 - submodule with wrapper for basic GUI functions for various GUI frameworks
-- submodule with utilities specific for Win32 platform
 - submodule with various utilities - read config file with standard parser, set up standard logger object ...
 
 ## Navigation

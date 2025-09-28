@@ -1,6 +1,6 @@
 # Personal utilities package for Python
 
-Package with various utilities i.e. VB regex translation, CLI logging, file handling, basic GUI Wrapper ...
+Package with various utilities i.e. VB regex translation, CLI logging, file handling, basic GUI wrapper ...
 
 ## Features
 
@@ -10,7 +10,6 @@ Set of submodules contains:
 - submodule with utilities to log CLI calls of Python scripts
 - submodule with utilities for file handling
 - submodule with wrapper for basic GUI functions for various GUI frameworks
-- submodule with utilities specific for Win32 platform
 - submodule with various utilities - read config file with standard parser, set up standard logger object ...
 
 Note: as I am coming from camel case notation I was struggling a little bit with the Python naming conventions.

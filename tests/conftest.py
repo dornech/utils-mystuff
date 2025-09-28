@@ -1,5 +1,5 @@
 """
-Dummy conftest.py for `Personal utils package`.
+Dummy conftest.py for `Personal utilities package for Python`.
 
 If you don't know what this is for, just leave it empty.
 Read more about conftest.py under:
