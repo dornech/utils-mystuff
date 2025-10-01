@@ -16,6 +16,8 @@ Module contains a collection of miscellaneous utilties.
 # others
 # ruff: noqa: B006 DTZ007 E501 PLW0602 SIM102 SIM105
 
+# docsig: disable=SIG501
+
 # fmt: off
 
 
@@ -303,11 +305,12 @@ def to_boolean(value: Union[str, int, float, bool], truevalues: list[str] = ["tr
 # inspired by https://stackoverflow.com/questions/19927654/using-dateutil-parser-to-parse-a-date-in-another-language/62581811#62581811
 class parserinfo_localized(dateutil.parser.parserinfo):
     """
-    parserinfo_localized - create localized da
-    te parser object
+    parserinfo_localized - create localized date parser object
     """
 
     def __init__(self, locale: str, *args, **kwargs):
+        """ initialize parserinfo localized """
+
         with setlocale(locale):
             self.WEEKDAYS = zip(calendar.day_abbr, calendar.day_name)  # type: ignore[assignment]
             self.MONTHS = list(zip(calendar.month_abbr, calendar.month_name))[1:]  # type: ignore[assignment]
@@ -408,7 +411,7 @@ def ignore_exceptions_parameterized(ignored_exceptions: tuple[BaseException]):
         ignored_exceptions (tuple[BaseException]): exceptions to be ignored
 
     Returns:
-      Callable: wrapped function
+        Callable: wrapped function
     """
     def ignore_exceptions_helper(func):
 
@@ -439,7 +442,7 @@ def ignore_exceptions(func):
         func (Callable): function to be decorated
 
     Returns:
-      Callable: wrapped function
+        Callable: wrapped function
     """
 
     @wraps(func)
