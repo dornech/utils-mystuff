@@ -6,6 +6,10 @@
 
 ### Bug fixes
 
+- Docsig corrections
+(['4e2fbbd'](https://github.com/dornech/utils-mystuff/commit/4e2fbbd7027d0bde87a29d6e13155e4dc76c9e94))
+- Final clean-up before publication
+(['bccba2f'](https://github.com/dornech/utils-mystuff/commit/bccba2f8198894321cea8c0fc3a1df6411d2d4f5))
 - Split package in platform-dependent and windows-dependent part
 (['1a65792'](https://github.com/dornech/utils-mystuff/commit/1a65792a558a0d170e0852ec0b3c7c17ec38ac7f))
 - Adjustments for commitizen tool-chain
@@ -33,6 +37,9 @@
  (['4b9060a'](https://github.com/dornech/utils-mystuff/commit/4b9060adb11aeda420a291114e55a8f60ca7d322))
 - Initial commit
 (['8a19bdb'](https://github.com/dornech/utils-mystuff/commit/8a19bdb5880e926fc2367a7991086b5a31c20cb7))
+
+### Documentation
+
 
 ### Features
 

@@ -1,7 +1,7 @@
 # utilities - miscellaneous
 
 """
-Module contains a collection of miscellaneous utilties.
+Module contains a collection of miscellaneous utilities.
 """
 
 
@@ -12,9 +12,12 @@ Module contains a collection of miscellaneous utilties.
 # naming conventions
 # ruff: noqa: N801, N802, N803, N806, N812, N813, N815, N816, N818, N999
 # boolean-type arguments
-# ruff: noqa: FBT001, FBT002
+# ruff: noqa: FBT001, FBT002, S101
 # others
-# ruff: noqa: B006 DTZ007 E501 PLW0602 SIM102 SIM105
+# ruff: noqa: B006, B905, DTZ007, E501, PLW0602, SIM102, SIM105, UP007, UP045
+#
+# disable mypy errors
+# mypy: disable-error-code = "unused-ignore"
 
 # docsig: disable=SIG501
 
@@ -22,7 +25,12 @@ Module contains a collection of miscellaneous utilties.
 
 
 
-from typing import Any, Callable, Optional, Union
+from typing import Any, Callable, Optional, TypeVar, Union
+# importing ParamSpec in backwards compatible way
+try:
+    from typing import ParamSpec  # type: ignore
+except ImportError:
+    from typing_extensions import ParamSpec  # type: ignore
 
 import sys
 import os
@@ -95,7 +103,7 @@ def get_real_apppath() -> tuple[str, str]:
 # read config file with standardized boolean states into ConfigParser object
 def readconfigfile(
     configfile: str,
-    optionxform: Optional[Callable] = None,
+    optionxform: Optional[Callable[[str], str]] = None,
     encoding: str = "utf-8"
 ) -> configparser.ConfigParser:
     """
@@ -103,7 +111,7 @@ def readconfigfile(
 
     Args:
         configfile (str): config file
-        optionxform (callable, optional): callable to pass on to ConfigParser.optionxform. Defaults to None.
+        optionxform (callable[[str], str]], optional): callable to pass on to ConfigParser.optionxform. Defaults to None.
         encoding (str, optional): file encoding. Defaults to "utf-8".
 
     Raises:
@@ -135,7 +143,7 @@ def readconfigfile(
 
 def read_configfile(
     configfile: str,
-    optionxform: Optional[Callable] = None,
+    optionxform: Optional[Callable[[str], str]] = None,
     encoding: str = "utf-8"
 ) -> configparser.ConfigParser:
     """
@@ -143,7 +151,7 @@ def read_configfile(
 
     Args:
         configfile (str): config file
-        optionxform (callable, optional): callable to pass on to ConfigParser.optionxform. Defaults to None.
+        optionxform (callable[[str], str]], optional): callable to pass on to ConfigParser.optionxform. Defaults to None.
         encoding (str, optional): file encoding. Defaults to "utf-8".
 
     Raises:
@@ -197,7 +205,8 @@ def initLogger(
         logger.setLevel(logging.INFO)
         loggers[loggername] = logger
 
-    return logger  # type: ignore
+    assert logger is not None
+    return logger
 
 def init_logger(
     loggername: str,
@@ -283,8 +292,10 @@ def to_bool(value: Union[str, int, float, bool], truevalues: list[str] = ["true"
         return value
     elif type(value) in {int, float}:
         return value != 0
+    elif type(value) is str:
+        return value.lower() in truevalues
     else:
-        return value.lower() in truevalues  # type: ignore
+        return False
 
 def to_boolean(value: Union[str, int, float, bool], truevalues: list[str] = ["true", "yes", "x", "1", "-1"]) -> bool:
     """
@@ -308,10 +319,10 @@ class parserinfo_localized(dateutil.parser.parserinfo):
     parserinfo_localized - create localized date parser object
     """
 
-    def __init__(self, locale: str, *args, **kwargs):
+    def __init__(self, localeID: str, *args, **kwargs):
         """ initialize parserinfo localized """
 
-        with setlocale(locale):
+        with setlocale(localeID):
             self.WEEKDAYS = zip(calendar.day_abbr, calendar.day_name)  # type: ignore[assignment]
             self.MONTHS = list(zip(calendar.month_abbr, calendar.month_name))[1:]  # type: ignore[assignment]
         super().__init__(*args, **kwargs)
@@ -332,7 +343,8 @@ def isdate(checkvalue: Any, checkformat="%d.%m.%Y") -> bool:
 
     if checkvalue is None or checkvalue == "":
         return False
-    elif type(checkvalue).__name__ == "datetime" or type(checkvalue).__name__ == "date":
+    # elif type(checkvalue).__name__ == "datetime" or type(checkvalue).__name__ == "date":
+    elif isinstance(checkvalue, (datetime.datetime, datetime.date)):
         return True
     elif isinstance(checkvalue, str):
         try:
@@ -400,10 +412,15 @@ def copy_dictfields(source: dict, target: Any) -> None:
 # https://lemonfold.io/posts/2022/dbc/typed_decorator/
 
 
+_P = ParamSpec('_P')
+_R = TypeVar('_R')
+_FuncT = TypeVar('_FuncT', bound=Callable[..., Any])
+
 # parameterized decorator
 # - definition of ignored exceptions in decorator parameter using closure
 # - no change of signature of decorated function
-def ignore_exceptions_parameterized(ignored_exceptions: tuple[BaseException]):
+# Note: Optional added for cases where exception is caught (hint from AI)
+def ignore_exceptions_parameterized(ignored_exceptions: tuple[type[BaseException]]) -> Callable[[Callable[_P, _R]], Callable[_P, Optional[_R]]]:  # type: ignore
     """
     ignore_exceptions_parameterized - parameterized decorator for ignoring exceptions using closure
 
@@ -434,7 +451,7 @@ def ignore_exceptions_parameterized(ignored_exceptions: tuple[BaseException]):
 # non-parameterized decorator
 # - definition of ignored exceptions via parameter of decorated function
 # - change of signature of decorated function, dependency between decorator and decorated function
-def ignore_exceptions(func):
+def ignore_exceptions(func: Callable[..., Any]) -> Callable[..., Any]:
     """
     ignore_exceptions - decorator for ignoring exceptions using parameter in decorated function
 
@@ -449,7 +466,8 @@ def ignore_exceptions(func):
     def wrapper(*args, **kwargs):
         result = None
         ignored_exceptions = kwargs.get('ignored_exceptions')
-        if ignored_exceptions:
+        # if ignored_exceptions:
+        if isinstance(ignored_exceptions, tuple) and all(issubclass(e, BaseException) for e in ignored_exceptions):
             try:
                 result = func(*args, **kwargs)
             except ignored_exceptions:

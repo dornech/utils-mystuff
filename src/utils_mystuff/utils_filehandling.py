@@ -12,7 +12,7 @@ Module contains filesystem related utilities.
 # naming conventions
 # ruff: noqa: N801, N802, N803, N806, N812, N813, N815, N816, N818, N999
 # others
-# ruff: noqa: E501 PLR1702 PLW1514 SIM102 SIM115 TID252 UP015
+# ruff: noqa: E501, PLR1702, PLW1514, SIM102, SIM115, TID252, UP015
 
 # fmt: off
 
