@@ -48,7 +48,9 @@ dependencies = [
 dynamic = ["version"]
 
 [project.optional-dependencies]
-# n. a.
+python39 = [
+    "typing-extensions",
+]
 
 [project.scripts]
 # n. a.
