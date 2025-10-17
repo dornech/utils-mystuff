@@ -2,10 +2,12 @@
 
 
 
-## [Unreleased](https://github.com/dornech/utils-mystuff/releases/tag/Unreleased) 
+## [v1.0.0](https://github.com/dornech/utils-mystuff/releases/tag/v1.0.0)  (2025-10-17) 
 
 ### Bug fixes
 
+- Corrections due to problem with building documentation
+(['5a4b134'](https://github.com/dornech/utils-mystuff/commit/5a4b13437547dc2538abc0990ae7b1ca03ac97a6))
 - Docsig corrections
 (['4e2fbbd'](https://github.com/dornech/utils-mystuff/commit/4e2fbbd7027d0bde87a29d6e13155e4dc76c9e94))
 - Final clean-up before publication
