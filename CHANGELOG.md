@@ -2,6 +2,13 @@
 
 
 
+## [v1.0.1](https://github.com/dornech/utils-mystuff/releases/tag/v1.0.1)  (2025-10-17) 
+
+### Bug fixes
+
+- Dummy-release for testpypi / pypi, include optional dependency for backward compatibility
+(['f535766'](https://github.com/dornech/utils-mystuff/commit/f5357665a4fabf45a8a7225f8388669931b1f246))
+
 ## [v1.0.0](https://github.com/dornech/utils-mystuff/releases/tag/v1.0.0)  (2025-10-17) 
 
 ### Bug fixes
