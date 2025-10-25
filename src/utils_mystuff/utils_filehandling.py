@@ -20,21 +20,12 @@ Module contains filesystem related utilities.
 
 from typing import Optional, Union
 
-import sys
 import os
 import fnmatch
 import datetime
 import dateutil.tz
 import pytz
 import time
-
-from .utils_GUI import alertbox
-
-if os.name == "nt" or sys.platform == "win32":
-    from .utils_win32 import close_app_windowtitle
-else:
-    err_msg = f"No implementation for your platform ('{os.name}') available"
-    raise ImportError(err_msg)
 
 
 
@@ -184,21 +175,3 @@ def load_textfile(txt_filename: str, mode: str = "str") -> Union[list[str], str]
         raise Exception(err_msg)
 
     return txt
-
-
-# close file
-def close_app_file(filename: str, msg: str, title: str) -> None:
-    """
-    close_app_file - close data file opened by an application
-
-    Args:
-        filename (str): filename
-        msg (str): message for alert box
-        title (str): title for alert box
-    """
-
-    close_app_windowtitle(filename)
-    if file_locked(filename):
-        close_app_windowtitle(os.path.splitext(os.path.basename(filename))[0])
-    while file_locked(filename):
-        alertbox(msg, title)
