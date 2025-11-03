@@ -29,20 +29,9 @@ Raises:
 # fmt: off
 
 
-# version determination
 
-# original Hatchlor version
-# from importlib.metadata import PackageNotFoundError, version
-# try:
-#     __version__ = version('{{ cookiecutter.project_slug }}')
-# except PackageNotFoundError:  # pragma: no cover
-#     __version__ = 'unknown'
-# finally:
-#     del version, PackageNotFoundError
-
-# latest import requirement for hatch-vcs-footgun-example
+# version determination - latest import requirement for hatch-vcs-footgun-example
 from utils_mystuff.version import __version__
-
 
 from .logger_CLI import *
 from .utils_filehandling import *
