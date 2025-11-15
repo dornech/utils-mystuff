@@ -382,12 +382,12 @@ def copydictfields(source: dict, target: Any) -> None:
 
     Args:
         source (dict): source dictionary
-        target (Any): target dictionary
+        target (Any): target structure
     """
 
     for key, value in source.items():
         if hasattr(target, key):
-            target.key = value
+            setattr(target, key, value)
         elif isinstance(target, dict):
             if key in target:
                 target[key] = value
@@ -401,7 +401,7 @@ def copy_dictfields(source: dict, target: Any) -> None:
 
     Args:
         source (dict): source dictionary
-        target (Any): target dictionary
+        target (Any): target structure
     """
     copy_dictfields(source, target)
 
