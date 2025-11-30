@@ -25,7 +25,8 @@ Module contains a collection of miscellaneous utilities.
 
 
 
-from typing import Any, Callable, Optional, TypeVar, Union
+from typing import Any, TypeVar
+from collections.abc import Callable
 # importing ParamSpec in backwards compatible way
 try:
     from typing import ParamSpec  # type: ignore
@@ -103,7 +104,7 @@ def get_real_apppath() -> tuple[str, str]:
 # read config file with standardized boolean states into ConfigParser object
 def readconfigfile(
     configfile: str,
-    optionxform: Optional[Callable[[str], str]] = None,
+    optionxform: Callable[[str], str] | None = None,
     encoding: str = "utf-8"
 ) -> configparser.ConfigParser:
     """
@@ -143,7 +144,7 @@ def readconfigfile(
 
 def read_configfile(
     configfile: str,
-    optionxform: Optional[Callable[[str], str]] = None,
+    optionxform: Callable[[str], str] | None = None,
     encoding: str = "utf-8"
 ) -> configparser.ConfigParser:
     """
@@ -275,7 +276,7 @@ def set_loglevel_from_config(logger: logging.Logger, config: configparser.Config
 
 
 # convert to bool - useful for evaluation of CLI parameters
-def to_bool(value: Union[str, int, float, bool], truevalues: list[str] = ["true", "yes", "x", "1", "-1"]) -> bool:
+def to_bool(value: str | int | float | bool, truevalues: list[str] = ["true", "yes", "x", "1", "-1"]) -> bool:
     """
     to_bool - convert basic scalar types to  bool
 
@@ -297,7 +298,7 @@ def to_bool(value: Union[str, int, float, bool], truevalues: list[str] = ["true"
     else:
         return False
 
-def to_boolean(value: Union[str, int, float, bool], truevalues: list[str] = ["true", "yes", "x", "1", "-1"]) -> bool:
+def to_boolean(value: str | int | float | bool, truevalues: list[str] = ["true", "yes", "x", "1", "-1"]) -> bool:
     """
     to_boolean - convert basic scalar types to  bool
 
@@ -420,7 +421,7 @@ _FuncT = TypeVar('_FuncT', bound=Callable[..., Any])
 # - definition of ignored exceptions in decorator parameter using closure
 # - no change of signature of decorated function
 # Note: Optional added for cases where exception is caught (hint from AI)
-def ignore_exceptions_parameterized(ignored_exceptions: tuple[type[BaseException]]) -> Callable[[Callable[_P, _R]], Callable[_P, Optional[_R]]]:  # type: ignore
+def ignore_exceptions_parameterized(ignored_exceptions: tuple[type[BaseException]]) -> Callable[[Callable[_P, _R]], Callable[_P, _R | None]]:  # type: ignore
     """
     ignore_exceptions_parameterized - parameterized decorator for ignoring exceptions using closure
 

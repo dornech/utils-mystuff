@@ -18,8 +18,6 @@ Module contains filesystem related utilities.
 
 
 
-from typing import Optional, Union
-
 import os
 import fnmatch
 import datetime
@@ -81,7 +79,7 @@ def is_file_locked(filepath: str, waittime: float = 0.1) -> bool:
 def find_last_changed_file(
     searchpath: str,
     searchpattern: str,
-    searchstart: Optional[datetime.datetime] = None,
+    searchstart: datetime.datetime | None = None,
     timeout_sec: int = 10
 ) -> str:
     """
@@ -127,7 +125,7 @@ def find_last_changed_file(
 
 
 # load text file
-def load_textfile(txt_filename: str, mode: str = "str") -> Union[list[str], str]:
+def load_textfile(txt_filename: str, mode: str = "str") -> list[str] | str:
     """
     load_textfile - load textfile to list of strings or str
 
@@ -139,7 +137,7 @@ def load_textfile(txt_filename: str, mode: str = "str") -> Union[list[str], str]
         Union[list[str], str]: content of textfile as list of string or string
     """
 
-    txt: Union[list[str], str] = ""
+    txt: list[str] | str = ""
 
     fileexists = os.path.isfile(txt_filename)
 

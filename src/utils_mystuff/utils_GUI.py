@@ -59,7 +59,7 @@ True
 
 
 
-from typing import Any, Union
+from typing import Any
 
 import sys
 import os.path
@@ -193,7 +193,7 @@ class GUIwrapperClass:
         title: str = "",
         choices: list[str] = [],
         multiselect: bool = False
-    ) -> Union[str, list[str]]:
+    ) -> str | list[str]:
         """
         listbox - display listbox with single or multiple selection option
 
@@ -206,7 +206,7 @@ class GUIwrapperClass:
         Returns:
             Union[str, List[str]]: selected option(s)
         """
-        retval: Union[str, list[str]] = ""  # dummy assignment for mypy
+        retval: str | list[str] = ""  # dummy assignment for mypy
 
         if title == "":
             title = os.path.basename(sys.argv[0])
@@ -373,7 +373,7 @@ def listbox(
     title: str = "",
     choices: list[str] = [],
     multiselect: bool = False
-) -> Union[str, list[str]]:
+) -> str | list[str]:
     """
     listbox - caller stub for singleton GUIwrapperClass object method
 
