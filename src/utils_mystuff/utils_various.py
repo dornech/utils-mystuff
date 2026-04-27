@@ -315,6 +315,7 @@ def to_boolean(value: str | int | float | bool, truevalues: list[str] = ["true",
 
 # create localized parserinfo object for dateutil.parser
 # inspired by https://stackoverflow.com/questions/19927654/using-dateutil-parser-to-parse-a-date-in-another-language/62581811#62581811
+# note changed initialization of WEEEKDAYS because method references to calendar do not work
 class parserinfo_localized(dateutil.parser.parserinfo):
     """
     parserinfo_localized - create localized date parser object
@@ -324,7 +325,8 @@ class parserinfo_localized(dateutil.parser.parserinfo):
         """ initialize parserinfo localized """
 
         with setlocale(localeID):
-            self.WEEKDAYS = zip(calendar.day_abbr, calendar.day_name)  # type: ignore[assignment]
+            # self.WEEKDAYS = zip(calendar.day_abbr, calendar.day_name)  # type: ignore[assignment]
+            self.WEEKDAYS = list(zip([calendar.day_abbr[x] for x in range(0, 7)], [calendar.day_name[x] for x in range(0, 7)]))  # type: ignore[assignment]
             self.MONTHS = list(zip(calendar.month_abbr, calendar.month_name))[1:]  # type: ignore[assignment]
         super().__init__(*args, **kwargs)
 
