@@ -73,6 +73,34 @@ def is_file_locked(filepath: str, waittime: float = 0.1) -> bool:
     return file_locked(filepath, waittime)
 
 
+# wait for file with timeout
+# aproaches here: https://stackoverflow.com/questions/54487381/check-for-a-files-availability-for-a-certain-time-and-then-break
+def wait_for_file(filepath: str, timeout: int = 5, waittime: float = 0.1) -> bool:
+    """
+    wait_for_file - wait until file is available or timeout
+
+    Args:
+        filepath (str): filepath to be checked
+        timeout (int): timeout period
+        waittime (float): waittime between two checks
+
+    Returns:
+        bool: True if file exists
+    """
+
+    start_time = time.time()
+    file_exists = os.path.exists(filepath)
+
+    while not file_exists:
+        time.sleep(waittime)
+        file_exists = os.path.exists(filepath)
+        elapsed_time = time.time() - start_time
+        if timeout > 0 and elapsed_time >= timeout:
+            break
+
+    return file_exists
+
+
 # find latest changed file in searchpath matching filename pattern provided as searchpattern
 # timestamp referring to nanoseconds timestamp from filesystem, otherwise problems in rare cases
 # (1 second resolution not sufficient)
