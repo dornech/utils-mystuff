@@ -74,7 +74,7 @@ def is_file_locked(filepath: str, waittime: float = 0.1) -> bool:
 
 
 # wait for file with timeout
-# aproaches here: https://stackoverflow.com/questions/54487381/check-for-a-files-availability-for-a-certain-time-and-then-break
+# approaches here: https://stackoverflow.com/questions/54487381/check-for-a-files-availability-for-a-certain-time-and-then-break
 def wait_for_file(filepath: str, timeout: int = 5, waittime: float = 0.1) -> bool:
     """
     wait_for_file - wait until file is available or timeout
