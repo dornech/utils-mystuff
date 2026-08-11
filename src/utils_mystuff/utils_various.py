@@ -25,13 +25,8 @@ Module contains a collection of miscellaneous utilities.
 
 
 
-from typing import Any, TypeVar
+from typing import Any, ParamSpec, TypeVar
 from collections.abc import Callable
-# importing ParamSpec in backwards compatible way
-try:
-    from typing import ParamSpec  # type: ignore
-except ImportError:
-    from typing_extensions import ParamSpec  # type: ignore
 
 import sys
 import os
