@@ -12,12 +12,13 @@ Module contains filesystem related utilities.
 # naming conventions
 # ruff: noqa: N801, N802, N803, N806, N812, N813, N815, N816, N818, N999
 # others
-# ruff: noqa: E501, PLR1702, PLW1514, SIM102, SIM115, TID252, UP015
+# ruff: noqa: E501, PLR1702, PLW1514, RUF105, SIM102, SIM115, TID252, UP015
 
 # fmt: off
 
 
 
+import glob
 import os
 import fnmatch
 import datetime
@@ -101,6 +102,63 @@ def wait_for_file(filepath: str, timeout: int = 5, waittime: float = 0.1) -> boo
     return file_exists
 
 
+def wait_for_file_with_wildcard(filepath: str, timeout: float = 5, waittime: float = 0.1) -> str | None:
+    """
+    wait_for_file_with_wildcard - wait until file is available or timeout
+
+    Args:
+        filepath (str): filepath with wildcard to be checked
+        timeout (int): timeout period
+        waittime (float): waittime between two checks
+
+    Returns:
+        str: first found filename if found, otherwise None
+    """
+
+    start_time = time.time()
+    files = None
+
+    while not files:
+        time.sleep(waittime)
+        files = glob.glob(filepath)
+        if files:
+            return files[0]
+        elapsed_time = time.time() - start_time
+        if timeout > 0 and elapsed_time >= timeout:
+            break
+
+    return None
+
+
+def wait_for_file_out_of_list(filepaths: list[str], timeout: float = 5, waittime: float = 0.1) -> str | None:
+    """
+    wait_for_file_out_of_list - wait for file out of list
+
+    Args:
+        filepaths (str): list of filepaths to be checked
+        timeout (int): timeout period
+        waittime (float): waittime between two checks
+
+    Returns:
+        str: first found filename if found, otherwise None
+    """
+
+    start_time = time.time()
+    file = None
+
+    while not file:
+        time.sleep(waittime)
+        for filepath in filepaths:
+            file = wait_for_file_with_wildcard(filepath, timeout=0.1, waittime=0.1)
+            if file:
+                return file
+        elapsed_time = time.time() - start_time
+        if timeout > 0 and elapsed_time >= timeout:
+            break
+
+    return None
+
+
 # find latest changed file in searchpath matching filename pattern provided as searchpattern
 # timestamp referring to nanoseconds timestamp from filesystem, otherwise problems in rare cases
 # (1 second resolution not sufficient)
@@ -135,7 +193,7 @@ def find_last_changed_file(
     while (lastchangedfile == "") and (datetime.datetime.now(dateutil.tz.tz.tzlocal()) <= timenow + datetime.timedelta(seconds=timeout_sec)):
 
         with os.scandir(searchpath) as searchpathscan:
-            scanentry: os.DirEntry    # overcome PyCharm IDE error - workaround derived from https://youtrack.jetbrains.com/issue/PY-46041
+            scanentry: os.DirEntry  # overcome PyCharm IDE error - workaround derived from https://youtrack.jetbrains.com/issue/PY-46041
             for scanentry in searchpathscan:
                 if fnmatch.fnmatch(scanentry.name, searchpattern):
                     filemodified = scanentry.stat().st_mtime_ns / 1000000000
