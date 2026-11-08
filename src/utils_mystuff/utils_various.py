@@ -14,7 +14,7 @@ Module contains a collection of miscellaneous utilities.
 # boolean-type arguments
 # ruff: noqa: FBT001, FBT002, S101
 # others
-# ruff: noqa: B006, B905, DTZ007, E501, PLW0602, SIM102, SIM105, UP007, UP045
+# ruff: noqa: B006, B905, DTZ007, E501, PLW0602, RUF105, SIM102, SIM105, UP007, UP045
 #
 # disable mypy errors
 # mypy: disable-error-code = "unused-ignore"

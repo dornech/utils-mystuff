@@ -8,11 +8,11 @@
 # naming conventions
 # ruff: noqa: N801, N802, N803, N806, N812, N813, N815, N816, N818, N999
 # others
-# ruff: noqa: F401
+# ruff: noqa: F401, RUF105
 
 
 import pytest
 
 
-def test_dummy():
+def test_dummy():  # docsig: disable=SIG101
     pass

@@ -48,7 +48,7 @@ True
 # boolean-type arguments
 # ruff: noqa: FBT001, FBT002
 # others
-# ruff: noqa: B006, E501, F841, PLW3301, RUF022
+# ruff: noqa: B006, E501, F841, PLW3301, RUF022, RUF105
 #
 # disable mypy errors
 # - errors occur when attributes of dynamically (re)loaded module(s)

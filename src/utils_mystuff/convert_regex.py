@@ -49,7 +49,7 @@ Example / doctest (note escaping in output to avoid error):
 # boolean-type arguments
 # ruff: noqa: FBT001, FBT002, Q003
 # others
-# ruff: noqa: E501
+# ruff: noqa: E501, RUF105
 
 # fmt: off
 

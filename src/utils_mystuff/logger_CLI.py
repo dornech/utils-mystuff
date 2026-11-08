@@ -13,7 +13,7 @@ parsed arguments structure.
 # naming conventions
 # ruff: noqa: N801, N802, N803, N806, N812, N813, N815, N816, N818, N999
 # others
-# ruff: noqa: E115, E501, RUF059, SIM102
+# ruff: noqa: E115, E501, RUF059, RUF105, SIM102
 #
 # disable mypy errors
 # - mypy error "'object' has no attribute 'xyz' [attr-defined]" when accessing attributes of
