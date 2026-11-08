@@ -2,7 +2,59 @@
 
 
 
+## [v1.2.0](https://github.com/dornech/utils-mystuff/releases/tag/v1.2.0)  (2026-11-08) 
+
+### Features
+
+- Improve wait for files / additional callers
+(['60f04cb'](https://github.com/dornech/utils-mystuff/commit/60f04cb74c193592abb991c20c2be22da8e53edb))
+- Template improvements and fixes - allow browser tests in GitHub Action by adding optional Chrome installer action
+(['4a58158'](https://github.com/dornech/utils-mystuff/commit/4a5815859cfff98bfb9faa05b40d41d470fa367b))
+- Template improvements - reorganize/group tests, dependency check in pre-commit
+(['abaa579'](https://github.com/dornech/utils-mystuff/commit/abaa579cb41d5f5a44389ca4851a0c83c39d4490))
+
+### Bug fixes
+
+- Adjustment new ruff-version (RUF105)
+(['db9ce49'](https://github.com/dornech/utils-mystuff/commit/db9ce49483c6c280b7647cf0e394b21c5fbc85cc))
+- No testcases marked local considered in GitHub Action for build-test
+(['57d37d4'](https://github.com/dornech/utils-mystuff/commit/57d37d45225a5f912dcb5bb2e17997b63f3623e3))
+- Delete type_extensions dependency for importing ParamSpec (Python 3.9. leftover
+(['d5e0cb0'](https://github.com/dornech/utils-mystuff/commit/d5e0cb02edf69df8e9ca81cf5ed0a41281c3f60a))
+- Optimize GitHub actions resource usage, avoid especially very expensive macOS-actions
+(['a6f3b0b'](https://github.com/dornech/utils-mystuff/commit/a6f3b0b06845d762da472e62cfa2fd416ba018e1))
+- Adjust minimum Python version to 3.11 and other fixes
+(['c0b8a95'](https://github.com/dornech/utils-mystuff/commit/c0b8a95263b60cdb0eaee613f4d134daa83c2309))
+- Update version.py
+(['2170a6f'](https://github.com/dornech/utils-mystuff/commit/2170a6ffdea879385691e6b4f2cb97794e99acc0))
+- Correct commitizen config
+(['15c704f'](https://github.com/dornech/utils-mystuff/commit/15c704fa6bcb575022a1ee381bbf83cbadcc7478))
+
+### Testing
+
+
+### Build system
+
+- **deps**: Bump sigstore/gh-action-sigstore-python from 3.4.0 to 3.5.0
+ (['f75fcd0'](https://github.com/dornech/utils-mystuff/commit/f75fcd028827b8f7118fa82ba73f38fb541f4ad3))
+- **deps**: Bump actions/setup-python from 6 to 7
+ (['488d9fd'](https://github.com/dornech/utils-mystuff/commit/488d9fddccaa0da95648c31c45afbd40f533f5f2))
+- **deps**: Bump actions/checkout from 6 to 7
+ (['ff70aff'](https://github.com/dornech/utils-mystuff/commit/ff70afffd8c7f801f61fb4e4465f23ae88aff498))
+
+### Chores
+
+- Disable new docsig rules SIG305, SIG306 in pyproject.toml
+(['3ff1a17'](https://github.com/dornech/utils-mystuff/commit/3ff1a1764b16d58b41d8317ce673121ee659dee9))
+
 ## [v1.1.0](https://github.com/dornech/utils-mystuff/releases/tag/v1.1.0)  (2026-06-18) 
+
+### Features
+
+- Switch from mkdocs and mkdocs-theme material to properdocs with theme materialx
+(['30c4351'](https://github.com/dornech/utils-mystuff/commit/30c4351600179b6ca4a750801a032d9f2c44e0ba))
+- New function wait_for_file
+(['4b1714c'](https://github.com/dornech/utils-mystuff/commit/4b1714cdc2a846a933df8871f80d21999e100b93))
 
 ### Bug fixes
 
@@ -60,12 +112,6 @@
 - Additional GitHub action - test documentation build
 (['b5add25'](https://github.com/dornech/utils-mystuff/commit/b5add251ee043ab81d0d1848a5e49c717f5eb77b))
 
-### Features
-
-- Switch from mkdocs and mkdocs-theme material to properdocs with theme materialx
-(['30c4351'](https://github.com/dornech/utils-mystuff/commit/30c4351600179b6ca4a750801a032d9f2c44e0ba))
-- New function wait_for_file
-(['4b1714c'](https://github.com/dornech/utils-mystuff/commit/4b1714cdc2a846a933df8871f80d21999e100b93))
 
 ## [v1.0.1](https://github.com/dornech/utils-mystuff/releases/tag/v1.0.1)  (2025-10-17) 
 
@@ -76,6 +122,11 @@
 
 
 ## [v1.0.0](https://github.com/dornech/utils-mystuff/releases/tag/v1.0.0)  (2025-10-17) 
+
+### Features
+
+- Include new version of hatch-vcs-footgun
+(['6026d7d'](https://github.com/dornech/utils-mystuff/commit/6026d7dde5c252c1bf5e85cc33fa9f4feb8c75f7))
 
 ### Bug fixes
 
@@ -106,20 +157,15 @@
 - Commit after clean-up
 (['ba5d5cb'](https://github.com/dornech/utils-mystuff/commit/ba5d5cb2342635f05510b3cf0b55b471d05c296a))
 
+### Documentation
+
+
 ### Build system
 
 - **deps**: Bump codecov/codecov-action from 4 to 5
  (['4b9060a'](https://github.com/dornech/utils-mystuff/commit/4b9060adb11aeda420a291114e55a8f60ca7d322))
 - Initial commit
 (['8a19bdb'](https://github.com/dornech/utils-mystuff/commit/8a19bdb5880e926fc2367a7991086b5a31c20cb7))
-
-### Documentation
-
-
-### Features
-
-- Include new version of hatch-vcs-footgun
-(['6026d7d'](https://github.com/dornech/utils-mystuff/commit/6026d7dde5c252c1bf5e85cc33fa9f4feb8c75f7))
 
 ### Initial commit
 
